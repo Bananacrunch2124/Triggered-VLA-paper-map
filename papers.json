@@ -1,61 +1,329 @@
 [
   {
-    "id": "ssr",
-    "title": "SSR: Sparse Scene Representation for End-to-End Autonomous Driving",
-    "authors": "Demo Authors",
+    "id": "transfuser",
+    "title": "Multi-Modal Fusion Transformer for End-to-End Autonomous Driving",
+    "authors": "Aditya Prakash, Kashyap Chitta, Andreas Geiger",
     "venue": "CVPR",
-    "year": 2024,
-    "summary": "A fast end-to-end driving model used here as an example paper for the Triggered-VLA paper map.",
-    "tags": ["E2E", "Driving", "Fast"],
-    "pdf": "https://arxiv.org/",
+    "year": 2021,
+    "summary": "A representative early end-to-end driving model that fuses camera and LiDAR features with transformers. Useful as background for the fast reactive expert in dual-expert driving systems.",
+    "tags": [
+      "E2E",
+      "Sensor Fusion",
+      "Reactive Policy"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2021/papers/Prakash_Multi-Modal_Fusion_Transformer_for_End-to-End_Autonomous_Driving_CVPR_2021_paper.pdf",
     "project": "",
-    "code": "https://github.com/"
+    "code": "https://github.com/autonomousvision/transfuser"
+  },
+  {
+    "id": "uniad",
+    "title": "Planning-Oriented Autonomous Driving",
+    "authors": "Yunze Hu et al.",
+    "venue": "CVPR",
+    "year": 2023,
+    "summary": "A landmark planning-oriented end-to-end framework that unifies perception, prediction, and planning. It is a key reference when positioning modern end-to-end autonomous driving pipelines.",
+    "tags": [
+      "E2E",
+      "Planning-Oriented",
+      "Unified Framework"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2023/papers/Hu_Planning-Oriented_Autonomous_Driving_CVPR_2023_paper.pdf",
+    "project": "",
+    "code": "https://github.com/OpenDriveLab/UniAD"
+  },
+  {
+    "id": "thinktwice",
+    "title": "Think Twice Before Driving: Towards Scalable Decoders for End-to-End Autonomous Driving",
+    "authors": "Xiaosong Jia et al.",
+    "venue": "CVPR",
+    "year": 2023,
+    "summary": "Introduces a scalable decoder with coarse-to-fine refinement for end-to-end driving. It is relevant as an example of adaptive computation inside an end-to-end policy, even though it is not a dual-expert switcher.",
+    "tags": [
+      "E2E",
+      "Scalable Decoder",
+      "Adaptive Computation"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad",
+      "two_branch_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2023/papers/Jia_Think_Twice_Before_Driving_Towards_Scalable_Decoders_for_End-to-End_Autonomous_CVPR_2023_paper.pdf",
+    "project": "",
+    "code": "https://github.com/OpenDriveLab/ThinkTwice"
+  },
+  {
+    "id": "driveadapter",
+    "title": "DriveAdapter: Breaking the Coupling Barrier of Perception and Planning in End-to-End Autonomous Driving",
+    "authors": "Xiaosong Jia et al.",
+    "venue": "ICCV",
+    "year": 2023,
+    "summary": "A strong end-to-end driving framework that explicitly revisits the coupling between perception and planning. It is useful for discussing how end-to-end systems improve robustness without moving to large multimodal reasoning models.",
+    "tags": [
+      "E2E",
+      "Perception-Planning",
+      "Closed-Loop"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jia_DriveAdapter_Breaking_the_Coupling_Barrier_of_Perception_and_Planning_in_ICCV_2023_paper.pdf",
+    "project": "",
+    "code": "https://github.com/OpenDriveLab/DriveAdapter"
+  },
+  {
+    "id": "vad",
+    "title": "VAD: Vectorized Scene Representation for Efficient Autonomous Driving",
+    "authors": "Bo Jiang et al.",
+    "venue": "ICCV",
+    "year": 2023,
+    "summary": "A representative efficient end-to-end method that replaces dense rasterized BEV with vectorized scene representation. It is especially relevant when motivating compact fast experts for deployment.",
+    "tags": [
+      "E2E",
+      "Efficiency",
+      "Vectorized Representation"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jiang_VAD_Vectorized_Scene_Representation_for_Efficient_Autonomous_Driving_ICCV_2023_paper.pdf",
+    "project": "",
+    "code": "https://github.com/hustvl/VAD"
+  },
+  {
+    "id": "ssr",
+    "title": "Navigation-Guided Sparse Scene Representation for End-to-End Autonomous Driving",
+    "authors": "Peidong Li et al.",
+    "venue": "ICLR",
+    "year": 2025,
+    "summary": "A sparse end-to-end driving framework that uses a compact navigation-guided representation and minimizes dependence on explicit perception supervision. It is directly relevant as a fast expert candidate for Triggered-VLA.",
+    "tags": [
+      "E2E",
+      "Sparse Representation",
+      "Efficiency"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openreview.net/forum?id=Vv76fCYffN",
+    "project": "",
+    "code": "https://github.com/PeidongLi/SSR"
   },
   {
     "id": "drivelm",
     "title": "DriveLM: Driving with Graph Visual Question Answering",
-    "authors": "Demo Authors",
+    "authors": "Cheng Sima et al.",
     "venue": "ECCV",
     "year": 2024,
-    "summary": "A representative vision-language style autonomous driving paper for map organization and comparison.",
-    "tags": ["VLM", "Reasoning", "Driving"],
-    "pdf": "https://arxiv.org/",
+    "summary": "A representative VLM-style autonomous driving work that formulates reasoning with graph VQA and supports interactive scene understanding. It is a key citation when introducing language-grounded reasoning in driving.",
+    "tags": [
+      "VLM",
+      "Reasoning",
+      "Graph VQA"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06870.pdf",
+    "project": "https://opendrivelab.com/DriveLM/",
+    "code": "https://github.com/OpenDriveLab/DriveLM"
+  },
+  {
+    "id": "rda-driver",
+    "title": "Making Large Language Models Better Planners with Reasoning-Decision Alignment",
+    "authors": "Zecheng Huang et al.",
+    "venue": "ECCV",
+    "year": 2024,
+    "summary": "An ECCV 2024 language-grounded planning method that aligns intermediate reasoning with driving decisions. It is useful when discussing how language reasoning is made behavior-relevant rather than purely descriptive.",
+    "tags": [
+      "LLM",
+      "Planning",
+      "Reasoning Alignment"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2408.13890",
     "project": "",
-    "code": "https://github.com/"
+    "code": ""
+  },
+  {
+    "id": "drivevlm",
+    "title": "DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models",
+    "authors": "Xiaoyu Tian et al.",
+    "venue": "CoRL",
+    "year": 2025,
+    "summary": "Introduces a VLM-based driving system and a hybrid DriveVLM-Dual variant that combines a slow reasoning branch with a traditional driving branch. This makes it one of the closest precursors to dual-expert autonomous driving.",
+    "tags": [
+      "VLM",
+      "Dual-Branch",
+      "Hybrid System"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad",
+      "two_branch_for_ad",
+      "branch_switch_for_ad"
+    ],
+    "pdf": "https://proceedings.mlr.press/v270/tian25c.html",
+    "project": "https://tsinghua-mars-lab.github.io/DriveVLM/",
+    "code": ""
+  },
+  {
+    "id": "leapad",
+    "title": "Continuously Learning, Adapting, and Improving: A Dual-Process Approach to Autonomous Driving",
+    "authors": "Jianbiao Mei et al.",
+    "venue": "NeurIPS",
+    "year": 2024,
+    "summary": "A dual-process autonomous driving framework inspired by System-1 and System-2 cognition. It is relevant to two-branch design because it explicitly separates heuristic driving from analytic reasoning.",
+    "tags": [
+      "Dual-Process",
+      "Reasoning",
+      "Memory"
+    ],
+    "sections": [
+      "two_branch_for_ad"
+    ],
+    "pdf": "https://proceedings.neurips.cc/paper_files/paper/2024/file/df04a35d907e894d59d4eab1f92bc87b-Paper-Conference.pdf",
+    "project": "https://pjlab-adg.github.io/LeapAD/",
+    "code": "https://github.com/PJLab-ADG/LeapAD"
+  },
+  {
+    "id": "drivegpt4",
+    "title": "DriveGPT4: Interpretable End-to-End Autonomous Driving via Large Language Model",
+    "authors": "Zhenhua Xu et al.",
+    "venue": "RA-L",
+    "year": 2024,
+    "summary": "An early influential LLM-for-driving work that couples language-based explanation with end-to-end control prediction. It is helpful for framing the interpretability and reasoning motivation behind later VLA systems.",
+    "tags": [
+      "LLM",
+      "Interpretable Driving",
+      "E2E"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/pdf/2310.01412",
+    "project": "",
+    "code": ""
+  },
+  {
+    "id": "drivegpt4-v2",
+    "title": "DriveGPT4-V2: Harnessing Large Language Model Capabilities for Enhanced Closed-Loop Autonomous Driving",
+    "authors": "Zhenhua Xu et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "Extends the DriveGPT line toward stronger closed-loop driving with improved tokenization, decision prediction, and inference speed. It is a representative recent large-model driving baseline.",
+    "tags": [
+      "LLM",
+      "Closed-Loop",
+      "Driving"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Xu_DriveGPT4-V2_Harnessing_Large_Language_Model_Capabilities_for_Enhanced_Closed-Loop_Autonomous_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": ""
+  },
+  {
+    "id": "s4-driver",
+    "title": "S4-Driver: Scalable Self-Supervised Driving Multimodal Large Language Model with Spatio-Temporal Visual Representation",
+    "authors": "Yichen Xie et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "A multimodal large-model driving method that transfers strong visual-language priors into 3D spatio-temporal planning without relying on dense manual annotations. It is useful when discussing the scaling trend of VLA-style driving models.",
+    "tags": [
+      "MLLM",
+      "Self-Supervised",
+      "Spatio-Temporal"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Xie_S4-Driver_Scalable_Self-Supervised_Driving_Multimodal_Large_Language_Model_with_Spatio-Temporal_CVPR_2025_paper.pdf",
+    "project": "https://s4-driver.github.io/",
+    "code": ""
+  },
+  {
+    "id": "simlingo",
+    "title": "SimLingo: Vision-Only Closed-Loop Autonomous Driving with Language-Action Alignment",
+    "authors": "Kai Renz et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "A vision-language-action model that jointly supports driving, VQA, and language-action alignment. It is a strong recent reference for unified VLA-style closed-loop driving.",
+    "tags": [
+      "VLA",
+      "Closed-Loop",
+      "Language-Action Alignment"
+    ],
+    "sections": [
+      "e2e_and_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Renz_SimLingo_Vision-Only_Closed-Loop_Autonomous_Driving_with_Language-Action_Alignment_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": "https://github.com/RenzKa/simlingo"
+  },
+  {
+    "id": "adadrive",
+    "title": "AdaDrive: Self-Adaptive Slow-Fast System for Language-Grounded Autonomous Driving",
+    "authors": "Ruifei Zhang et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "A slow-fast language-grounded driving framework that adapts large-model assistance according to scene complexity and prediction confidence. It is directly relevant to both dual-branch design and branch activation policy.",
+    "tags": [
+      "Slow-Fast",
+      "Adaptive Fusion",
+      "Language-Grounded"
+    ],
+    "sections": [
+      "two_branch_for_ad",
+      "branch_switch_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_AdaDrive_Self-Adaptive_Slow-Fast_System_for_Language-Grounded_Autonomous_Driving_ICCV_2025_paper.pdf",
+    "project": "",
+    "code": "https://github.com/ReaFly/AdaDrive"
+  },
+  {
+    "id": "eta",
+    "title": "ETA: Efficiency through Thinking Ahead, A Dual Approach to Self-Driving with Large Models",
+    "authors": "Shadi Hamdan et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "An asynchronous dual-system architecture that combines a small online model with heavy large-model reasoning shifted to earlier time steps. It is highly relevant when discussing efficient deployment of dual-expert driving systems.",
+    "tags": [
+      "Dual-System",
+      "Asynchronous",
+      "Efficiency"
+    ],
+    "sections": [
+      "two_branch_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2025/papers/Hamdan_ETA_Efficiency_through_Thinking_Ahead_A_Dual_Approach_to_Self-Driving_ICCV_2025_paper.pdf",
+    "project": "",
+    "code": "https://github.com/opendrivelab/ETA"
   },
   {
     "id": "adathinkdrive",
-    "title": "AdaThinkDrive: Adaptive Thinking for Autonomous Driving",
-    "authors": "Demo Authors",
+    "title": "AdaThinkDrive: Adaptive Thinking via Reinforcement Learning for Autonomous Driving",
+    "authors": "Yuechen Luo et al.",
     "venue": "arXiv",
     "year": 2025,
-    "summary": "A trigger-based driving paper example that is useful for building a paper relation board.",
-    "tags": ["Trigger", "Routing", "Reasoning"],
-    "pdf": "https://arxiv.org/",
-    "project": "",
-    "code": "https://github.com/"
-  },
-  {
-    "id": "impromptu-vla",
-    "title": "Impromptu-VLA: Vision-Language-Action Models for Driving",
-    "authors": "Demo Authors",
-    "venue": "arXiv",
-    "year": 2025,
-    "summary": "A VLA-style paper example for the slow but strong reasoning branch in your collection.",
-    "tags": ["VLA", "Action", "Reasoning"],
-    "pdf": "https://arxiv.org/",
-    "project": "",
-    "code": "https://github.com/"
-  },
-  {
-    "id": "triggered-vla",
-    "title": "Triggered-VLA",
-    "authors": "Your Project",
-    "venue": "In Progress",
-    "year": 2026,
-    "summary": "Your own project entry. You can keep this as the center of the board and connect related work around it.",
-    "tags": ["Your Work", "Trigger", "VLA"],
-    "pdf": "",
+    "summary": "A recent adaptive-reasoning VLA framework with fast-answer and slow-thinking modes. Although not yet a main-conference paper, it is directly relevant to branch switching and reasoning-on-demand in driving.",
+    "tags": [
+      "Adaptive Reasoning",
+      "VLA",
+      "Fast-Slow Thinking"
+    ],
+    "sections": [
+      "two_branch_for_ad",
+      "branch_switch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2509.13769",
     "project": "",
     "code": ""
   }
