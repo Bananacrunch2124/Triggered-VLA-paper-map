@@ -4,9 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Paper Map</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    h1 { margin-bottom: 10px; }
+    .paper { border: 1px solid #ccc; padding: 12px; margin-bottom: 12px; border-radius: 8px; }
+    .tag { display: inline-block; padding: 2px 8px; margin-right: 6px; border: 1px solid #999; border-radius: 999px; font-size: 12px; }
+  </style>
 </head>
 <body>
-  <h1>我的論文整理網站</h1>
-  <p>如果你看到這一頁，代表網站已經成功上線。</p>
+  <h1>我的論文整理</h1>
+  <p>這裡先放我自己整理的論文。</p>
+
+  <div class="paper">
+    <h3>Paper 1: 你的第一篇論文</h3>
+    <p>年份：2025</p>
+    <p>會議：CVPR</p>
+    <span class="tag">World Model</span>
+    <span class="tag">Planning</span>
+  </div>
+
+  <div class="paper">
+    <h3>Paper 2: 你的第二篇論文</h3>
+    <p>年份：2024</p>
+    <p>會議：ICCV</p>
+    <span class="tag">Occupancy</span>
+    <span class="tag">BEV</span>
+  </div>
 </body>
 </html>
