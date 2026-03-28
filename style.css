@@ -359,10 +359,8 @@ a {
 .board {
   position: relative;
   flex: 1;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 1px 1px, var(--board-dot) 1px, transparent 0);
-  background-size: 24px 24px;
+  overflow: auto;
+  background: var(--bg);
 }
 
 .board-grid {
@@ -668,4 +666,28 @@ body.theme-dark .node-menu-btn:hover {
   .board-section {
     min-height: 70vh;
   }
+}
+
+.board-canvas {
+  position: relative;
+  width: 2400px;
+  height: 1600px;
+  background:
+    radial-gradient(circle at 1px 1px, var(--board-dot) 1px, transparent 0);
+  background-size: 24px 24px;
+  transform-origin: top left;
+}
+
+.board-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.board-zoom-controls .tool-btn {
+  min-width: 44px;
+}
+
+#zoomIndicator {
+  min-width: 72px;
 }
