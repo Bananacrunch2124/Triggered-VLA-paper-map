@@ -51,18 +51,25 @@
       <section class="board-section">
         <div class="board-topline">
           <div class="board-hint">Drag papers here or double-click to add text</div>
-          <div id="zoomIndicator" class="zoom-indicator">100%</div>
+
+          <div class="board-zoom-controls">
+            <button id="zoomOutBtn" class="tool-btn" type="button">-</button>
+            <button id="zoomIndicator" class="tool-btn" type="button">100%</button>
+            <button id="zoomInBtn" class="tool-btn" type="button">+</button>
+          </div>
         </div>
 
         <div id="board" class="board" aria-label="Paper whiteboard">
-          <div class="board-grid"></div>
+          <div id="boardCanvas" class="board-canvas">
+            <div class="board-grid"></div>
 
-          <svg id="connectionSvg" class="connection-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            <svg id="connectionSvg" class="connection-svg" xmlns="http://www.w3.org/2000/svg"></svg>
 
-          <div id="boardItemsLayer" class="board-items-layer"></div>
+            <div id="boardItemsLayer" class="board-items-layer"></div>
 
-          <div id="emptyBoardHint" class="empty-board-hint">
-            Drag papers here or double-click to add text
+            <div id="emptyBoardHint" class="empty-board-hint">
+              Drag papers here or double-click to add text
+            </div>
           </div>
         </div>
       </section>
