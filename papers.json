@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ssr",
+    "title": "SSR: Sparse Scene Representation for End-to-End Autonomous Driving",
+    "authors": "Demo Authors",
+    "venue": "CVPR",
+    "year": 2024,
+    "summary": "A fast end-to-end driving model used here as an example paper for the Triggered-VLA paper map.",
+    "tags": ["E2E", "Driving", "Fast"],
+    "pdf": "https://arxiv.org/",
+    "project": "",
+    "code": "https://github.com/"
+  },
+  {
+    "id": "drivelm",
+    "title": "DriveLM: Driving with Graph Visual Question Answering",
+    "authors": "Demo Authors",
+    "venue": "ECCV",
+    "year": 2024,
+    "summary": "A representative vision-language style autonomous driving paper for map organization and comparison.",
+    "tags": ["VLM", "Reasoning", "Driving"],
+    "pdf": "https://arxiv.org/",
+    "project": "",
+    "code": "https://github.com/"
+  },
+  {
+    "id": "adathinkdrive",
+    "title": "AdaThinkDrive: Adaptive Thinking for Autonomous Driving",
+    "authors": "Demo Authors",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A trigger-based driving paper example that is useful for building a paper relation board.",
+    "tags": ["Trigger", "Routing", "Reasoning"],
+    "pdf": "https://arxiv.org/",
+    "project": "",
+    "code": "https://github.com/"
+  },
+  {
+    "id": "impromptu-vla",
+    "title": "Impromptu-VLA: Vision-Language-Action Models for Driving",
+    "authors": "Demo Authors",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A VLA-style paper example for the slow but strong reasoning branch in your collection.",
+    "tags": ["VLA", "Action", "Reasoning"],
+    "pdf": "https://arxiv.org/",
+    "project": "",
+    "code": "https://github.com/"
+  },
+  {
+    "id": "triggered-vla",
+    "title": "Triggered-VLA",
+    "authors": "Your Project",
+    "venue": "In Progress",
+    "year": 2026,
+    "summary": "Your own project entry. You can keep this as the center of the board and connect related work around it.",
+    "tags": ["Your Work", "Trigger", "VLA"],
+    "pdf": "",
+    "project": "",
+    "code": ""
+  }
+]
