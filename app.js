@@ -259,6 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setZoom(nextZoom) {
     state.zoom = clamp(Number(nextZoom) || 1, ZOOM_MIN, ZOOM_MAX);
+    console.log("zoom =", state.zoom);
     saveLayout();
     renderBoard();
   }
@@ -780,17 +781,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    zoomInBtn.addEventListener("click", () => {
-      setZoom(state.zoom + ZOOM_STEP);
-    });
+    if (zoomInBtn) {
+      zoomInBtn.addEventListener("click", () => {
+        setZoom(state.zoom + ZOOM_STEP);
+      });
+    }
 
-    zoomOutBtn.addEventListener("click", () => {
-      setZoom(state.zoom - ZOOM_STEP);
-    });
+    if (zoomOutBtn) {
+      zoomOutBtn.addEventListener("click", () => {
+        setZoom(state.zoom - ZOOM_STEP);
+      });
+    }
 
-    zoomIndicator.addEventListener("click", () => {
-      setZoom(1);
-    });
+    if (zoomIndicator) {
+      zoomIndicator.addEventListener("click", () => {
+        setZoom(1);
+      });
+    }
 
     board.addEventListener("click", () => {
       state.selectedItemId = null;
