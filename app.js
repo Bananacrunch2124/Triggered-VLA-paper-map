@@ -2,15 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "triggered_vla_paper_map_layout_v1";
   const THEME_KEY = "triggered_vla_paper_map_theme_v1";
 
+  const BOARD_BASE_WIDTH = 2400;
+  const BOARD_BASE_HEIGHT = 1600;
+  const ZOOM_MIN = 0.5;
+  const ZOOM_MAX = 2.0;
+  const ZOOM_STEP = 0.1;
+
   const searchInput = document.getElementById("searchInput");
   const paperList = document.getElementById("paperList");
   const paperCount = document.getElementById("paperCount");
   const boardCount = document.getElementById("boardCount");
   const board = document.getElementById("board");
+  const boardCanvas = document.getElementById("boardCanvas");
   const boardItemsLayer = document.getElementById("boardItemsLayer");
   const connectionSvg = document.getElementById("connectionSvg");
   const emptyBoardHint = document.getElementById("emptyBoardHint");
   const zoomIndicator = document.getElementById("zoomIndicator");
+  const zoomOutBtn = document.getElementById("zoomOutBtn");
+  const zoomInBtn = document.getElementById("zoomInBtn");
 
   const placeAllBtn = document.getElementById("placeAllBtn");
   const connectBtn = document.getElementById("connectBtn");
@@ -57,8 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
     connections: [],
     selectedItemId: null,
     currentPaperModalId: null,
-    editingNoteId: null
+    editingNoteId: null,
+    zoom: 1
   };
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
 
   function showToast(message) {
     toast.textContent = message;
@@ -72,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveLayout() {
     const payload = {
       boardItems: state.boardItems,
-      connections: state.connections
+      connections: state.connections,
+      zoom: state.zoom
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   }
@@ -82,11 +97,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw);
+
       if (Array.isArray(parsed.boardItems)) {
         state.boardItems = parsed.boardItems;
       }
       if (Array.isArray(parsed.connections)) {
         state.connections = parsed.connections;
+      }
+      if (typeof parsed.zoom === "number") {
+        state.zoom = clamp(parsed.zoom, ZOOM_MIN, ZOOM_MAX);
       }
     } catch (error) {
       console.error("Failed to load layout:", error);
@@ -136,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     paperCount.textContent = `${getFilteredPapers().length} papers`;
     boardCount.textContent = `${state.boardItems.length} on board`;
     emptyBoardHint.classList.toggle("hidden", state.boardItems.length > 0);
-    zoomIndicator.textContent = "100%";
+    zoomIndicator.textContent = `${Math.round(state.zoom * 100)}%`;
   }
 
   function getPaperById(paperId) {
@@ -233,6 +252,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  function updateBoardCanvasSize() {
+    boardCanvas.style.width = `${BOARD_BASE_WIDTH * state.zoom}px`;
+    boardCanvas.style.height = `${BOARD_BASE_HEIGHT * state.zoom}px`;
+  }
+
+  function setZoom(nextZoom) {
+    state.zoom = clamp(Number(nextZoom) || 1, ZOOM_MIN, ZOOM_MAX);
+    saveLayout();
+    renderBoard();
+  }
+
   function makeBoardItemDraggable(element, itemId) {
     const header = element.querySelector(".node-header");
     if (!header) return;
@@ -265,12 +295,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const item = getBoardItemById(itemId);
       if (!item) return;
 
-      const dx = event.clientX - startX;
-      const dy = event.clientY - startY;
+      const dx = (event.clientX - startX) / state.zoom;
+      const dy = (event.clientY - startY) / state.zoom;
 
-      const boardRect = board.getBoundingClientRect();
-      const maxX = Math.max(0, boardRect.width - 280);
-      const maxY = Math.max(0, boardRect.height - 120);
+      const maxX = BOARD_BASE_WIDTH - 280;
+      const maxY = BOARD_BASE_HEIGHT - 140;
 
       item.x = Math.max(0, Math.min(maxX, originX + dx));
       item.y = Math.max(0, Math.min(maxY, originY + dy));
@@ -294,7 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
     paperModalTitle.textContent = paper.title || "Paper";
     paperModalVenue.textContent = paper.venue || "Venue";
     paperModalYear.textContent = String(paper.year || "Year");
-    paperModalTags.textContent = Array.isArray(paper.tags) && paper.tags.length ? paper.tags.join(", ") : "No tags";
+    paperModalTags.textContent =
+      Array.isArray(paper.tags) && paper.tags.length ? paper.tags.join(", ") : "No tags";
     paperModalAuthors.textContent = paper.authors || "";
     paperModalSummary.textContent = paper.summary || "";
 
@@ -359,7 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function openExportModal() {
     const payload = {
       boardItems: state.boardItems,
-      connections: state.connections
+      connections: state.connections,
+      zoom: state.zoom
     };
     exportTextarea.value = JSON.stringify(payload, null, 2);
     exportModal.classList.remove("hidden");
@@ -379,7 +410,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const paper = getPaperById(paperId);
     if (!paper) return;
 
-    const pos = x === null || y === null ? getDefaultBoardPosition(state.boardItems.length) : { x, y };
+    const pos =
+      x === null || y === null
+        ? getDefaultBoardPosition(state.boardItems.length)
+        : { x, y };
 
     state.boardItems.push({
       id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
@@ -396,7 +430,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function removePaperFromBoard(paperId) {
-    const target = state.boardItems.find((item) => item.type === "paper" && item.paperId === paperId);
+    const target = state.boardItems.find(
+      (item) => item.type === "paper" && item.paperId === paperId
+    );
     if (!target) return;
 
     removeBoardItem(target.id);
@@ -493,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderConnections() {
-    const boardRect = board.getBoundingClientRect();
+    const canvasRect = boardCanvas.getBoundingClientRect();
 
     const lines = state.connections
       .map((conn) => {
@@ -504,10 +540,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const fromRect = fromEl.getBoundingClientRect();
         const toRect = toEl.getBoundingClientRect();
 
-        const x1 = fromRect.left - boardRect.left + fromRect.width / 2;
-        const y1 = fromRect.top - boardRect.top + fromRect.height / 2;
-        const x2 = toRect.left - boardRect.left + toRect.width / 2;
-        const y2 = toRect.top - boardRect.top + toRect.height / 2;
+        const x1 = fromRect.left - canvasRect.left + fromRect.width / 2;
+        const y1 = fromRect.top - canvasRect.top + fromRect.height / 2;
+        const x2 = toRect.left - canvasRect.left + toRect.width / 2;
+        const y2 = toRect.top - canvasRect.top + toRect.height / 2;
 
         const midX = (x1 + x2) / 2;
 
@@ -524,6 +560,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderBoard() {
+    updateBoardCanvasSize();
+
     boardItemsLayer.innerHTML = state.boardItems
       .map((item) => {
         const isSelected = state.selectedItemId === item.id;
@@ -537,7 +575,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <div
             class="board-item ${item.type === "paper" ? "paper-node" : "note-node"} ${isSelected ? "selected" : ""}"
             data-board-item-id="${escapeHtml(item.id)}"
-            style="left:${Number(item.x) || 0}px; top:${Number(item.y) || 0}px;"
+            style="
+              left:${(Number(item.x) || 0) * state.zoom}px;
+              top:${(Number(item.y) || 0) * state.zoom}px;
+              transform: scale(${state.zoom});
+              transform-origin: top left;
+            "
           >
             ${item.type === "paper" ? createPaperNodeHtml(item, paper) : createNoteNodeHtml(item)}
           </div>
@@ -653,6 +696,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       state.boardItems = parsed.boardItems;
       state.connections = parsed.connections;
+      if (typeof parsed.zoom === "number") {
+        state.zoom = clamp(parsed.zoom, ZOOM_MIN, ZOOM_MAX);
+      }
       state.selectedItemId = null;
 
       saveLayout();
@@ -734,6 +780,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    zoomInBtn.addEventListener("click", () => {
+      setZoom(state.zoom + ZOOM_STEP);
+    });
+
+    zoomOutBtn.addEventListener("click", () => {
+      setZoom(state.zoom - ZOOM_STEP);
+    });
+
+    zoomIndicator.addEventListener("click", () => {
+      setZoom(1);
+    });
+
     board.addEventListener("click", () => {
       state.selectedItemId = null;
       renderBoard();
@@ -743,11 +801,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const clickedInsideItem = event.target.closest(".board-item");
       if (clickedInsideItem) return;
 
-      const rect = board.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      const rect = boardCanvas.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / state.zoom;
+      const y = (event.clientY - rect.top) / state.zoom;
       openNoteModal(null, x, y);
     });
+
+    board.addEventListener(
+      "wheel",
+      (event) => {
+        if (!event.ctrlKey) return;
+        event.preventDefault();
+
+        if (event.deltaY < 0) {
+          setZoom(state.zoom + ZOOM_STEP);
+        } else {
+          setZoom(state.zoom - ZOOM_STEP);
+        }
+      },
+      { passive: false }
+    );
 
     closeNoteModalBtn.addEventListener("click", closeNoteModal);
     saveNoteBtn.addEventListener("click", saveNoteFromModal);
