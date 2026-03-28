@@ -7,7 +7,7 @@
     "year": 2021,
     "summary": "A representative end-to-end driving baseline that fuses camera and LiDAR for direct waypoint prediction. Useful as a canonical E2E reference in the fast-policy line.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2021/papers/Prakash_Multi-Modal_Fusion_Transformer_for_End-to-End_Autonomous_Driving_CVPR_2021_paper.pdf",
     "project": "",
@@ -22,7 +22,7 @@
     "year": 2023,
     "summary": "A strong E2E driving paper that decouples perception and planning with teacher-student adaptation while keeping the overall AD pipeline end-to-end at inference.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jia_DriveAdapter_Breaking_the_Coupling_Barrier_of_Perception_and_Planning_in_ICCV_2023_paper.pdf",
     "project": "",
@@ -37,7 +37,7 @@
     "year": 2023,
     "summary": "A foundational planning-oriented E2E framework that unifies perception, prediction, and planning under a single driving objective.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2023/papers/Hu_Planning-Oriented_Autonomous_Driving_CVPR_2023_paper.pdf",
     "project": "",
@@ -52,7 +52,7 @@
     "year": 2023,
     "summary": "An E2E driving method that improves decoder design and planning quality, often cited as a strong planning-oriented E2E baseline.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2023/html/Jia_Think_Twice_Before_Driving_Towards_Scalable_Decoders_for_End-to-End_Autonomous_CVPR_2023_paper.html",
     "project": "",
@@ -67,7 +67,7 @@
     "year": 2023,
     "summary": "An efficient end-to-end driving framework built on vectorized scene representations, often cited for efficiency-oriented E2E planning.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jiang_VAD_Vectorized_Scene_Representation_for_Efficient_Autonomous_Driving_ICCV_2023_paper.pdf",
     "project": "",
@@ -82,7 +82,7 @@
     "year": 2024,
     "summary": "An interpretable E2E autonomous driving framework that uses an LLM to connect multi-frame visual input, reasoning, QA, and low-level control.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://i.cs.hku.hk/~kykwong/publications/zxu_ral2024.pdf",
     "project": "",
@@ -97,7 +97,7 @@
     "year": 2024,
     "summary": "A representative VLM-for-driving paper that formulates driving as graph VQA spanning perception, prediction, planning, behavior, and motion.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06870.pdf",
     "project": "https://github.com/OpenDriveLab/DriveLM",
@@ -112,7 +112,7 @@
     "year": 2024,
     "summary": "Introduces ELM, a VLM-style embodied understanding framework for driving scenes with spatial and temporal reasoning.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/07908.pdf",
     "project": "https://opendrivelab.github.io/elm.github.io/",
@@ -127,7 +127,7 @@
     "year": 2024,
     "summary": "A language-guided closed-loop E2E driving framework that adapts a frozen LLM with sensor encoders and adapters for direct control generation.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2024/papers/Shao_LMDrive_Closed-Loop_End-to-End_Driving_with_Large_Language_Models_CVPR_2024_paper.pdf",
     "project": "https://opendilab.github.io/LMDrive/",
@@ -142,7 +142,7 @@
     "year": 2024,
     "summary": "A benchmark and method paper for chain-based VLM reasoning in driving, emphasizing interpretable perception-prediction-reasoning chains.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/03786.pdf",
     "project": "https://github.com/fudan-zvg/reason2drive",
@@ -157,7 +157,7 @@
     "year": 2025,
     "summary": "A recent E2E driving method that uses a sparse navigation-guided scene representation to reduce annotation burden and computation cost.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "e2e_for_ad"
     ],
     "pdf": "https://openreview.net/forum?id=Vv76fCYffN",
     "project": "",
@@ -172,7 +172,7 @@
     "year": 2025,
     "summary": "A unified E2E driving framework that combines long-term history aggregation, an LLM for scenario reasoning, and a generative planner.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/ICCV2025/html/Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_ICCV_2025_paper.html",
     "project": "https://github.com/xiaomi-mlab/Orion",
@@ -187,7 +187,7 @@
     "year": 2025,
     "summary": "A VLM-based closed-loop driving model that jointly targets driving, vision-language understanding, and language-action alignment.",
     "tags": [
-      "e2e_vlm_vla_for_ad"
+      "vlm_vla_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Renz_SimLingo_Vision-Only_Closed-Loop_Autonomous_Driving_with_Language-Action_Alignment_CVPR_2025_paper.pdf",
     "project": "",
