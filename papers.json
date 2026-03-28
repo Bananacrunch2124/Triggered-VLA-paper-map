@@ -15,19 +15,19 @@
     "fit_note": "Pure E2E driving paper; fits category 1 only."
   },
   {
-    "id": "thinktwice",
-    "title": "Think Twice before Driving: Towards Scalable Decoders for End-to-End Autonomous Driving",
+    "id": "driveadapter",
+    "title": "DriveAdapter: Breaking the Coupling Barrier of Perception and Planning in End-to-End Autonomous Driving",
     "authors": "Xiaosong Jia et al.",
-    "venue": "CVPR",
+    "venue": "ICCV",
     "year": 2023,
-    "summary": "An E2E driving method that improves decoder design and planning quality, often cited as a strong planning-oriented E2E baseline.",
+    "summary": "A strong E2E driving paper that decouples perception and planning with teacher-student adaptation while keeping the overall AD pipeline end-to-end at inference.",
     "tags": [
       "e2e_vlm_vla_for_ad"
     ],
-    "pdf": "https://openaccess.thecvf.com/content/CVPR2023/html/Jia_Think_Twice_Before_Driving_Towards_Scalable_Decoders_for_End-to-End_Autonomous_CVPR_2023_paper.html",
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jia_DriveAdapter_Breaking_the_Coupling_Barrier_of_Perception_and_Planning_in_ICCV_2023_paper.pdf",
     "project": "",
     "code": "",
-    "fit_note": "Pure E2E driving paper; fits category 1 only."
+    "fit_note": "E2E driving paper, but not VLM/VLA and not a dual-branch E2E+VLM method."
   },
   {
     "id": "uniad",
@@ -45,6 +45,21 @@
     "fit_note": "Pure E2E driving paper; fits category 1 only."
   },
   {
+    "id": "thinktwice",
+    "title": "Think Twice before Driving: Towards Scalable Decoders for End-to-End Autonomous Driving",
+    "authors": "Xiaosong Jia et al.",
+    "venue": "CVPR",
+    "year": 2023,
+    "summary": "An E2E driving method that improves decoder design and planning quality, often cited as a strong planning-oriented E2E baseline.",
+    "tags": [
+      "e2e_vlm_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2023/html/Jia_Think_Twice_Before_Driving_Towards_Scalable_Decoders_for_End-to-End_Autonomous_CVPR_2023_paper.html",
+    "project": "",
+    "code": "",
+    "fit_note": "Pure E2E driving paper; fits category 1 only."
+  },
+  {
     "id": "vad",
     "title": "VAD: Vectorized Scene Representation for Efficient Autonomous Driving",
     "authors": "Bo Jiang et al.",
@@ -58,51 +73,6 @@
     "project": "",
     "code": "https://github.com/hustvl/VAD",
     "fit_note": "Pure E2E driving paper; fits category 1 only."
-  },
-  {
-    "id": "driveadapter",
-    "title": "DriveAdapter: Breaking the Coupling Barrier of Perception and Planning in End-to-End Autonomous Driving",
-    "authors": "Xiaosong Jia et al.",
-    "venue": "ICCV",
-    "year": 2023,
-    "summary": "A strong E2E driving paper that decouples perception and planning with teacher-student adaptation while keeping the overall AD pipeline end-to-end at inference.",
-    "tags": [
-      "e2e_vlm_vla_for_ad"
-    ],
-    "pdf": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jia_DriveAdapter_Breaking_the_Coupling_Barrier_of_Perception_and_Planning_in_ICCV_2023_paper.pdf",
-    "project": "",
-    "code": "",
-    "fit_note": "E2E driving paper, but not VLM/VLA and not a dual-branch E2E+VLM method."
-  },
-  {
-    "id": "ssr",
-    "title": "Navigation-Guided Sparse Scene Representation for End-to-End Autonomous Driving",
-    "authors": "Peidong Li et al.",
-    "venue": "ICLR",
-    "year": 2025,
-    "summary": "A recent E2E driving method that uses a sparse navigation-guided scene representation to reduce annotation burden and computation cost.",
-    "tags": [
-      "e2e_vlm_vla_for_ad"
-    ],
-    "pdf": "https://openreview.net/forum?id=Vv76fCYffN",
-    "project": "",
-    "code": "https://github.com/PeidongLi/SSR",
-    "fit_note": "Pure E2E driving paper; fits category 1 only."
-  },
-  {
-    "id": "lmdrive",
-    "title": "LMDrive: Closed-Loop End-to-End Driving with Large Language Models",
-    "authors": "Haowei Shao et al.",
-    "venue": "CVPR",
-    "year": 2024,
-    "summary": "A language-guided closed-loop E2E driving framework that adapts a frozen LLM with sensor encoders and adapters for direct control generation.",
-    "tags": [
-      "e2e_vlm_vla_for_ad"
-    ],
-    "pdf": "https://openaccess.thecvf.com/content/CVPR2024/papers/Shao_LMDrive_Closed-Loop_End-to-End_Driving_with_Large_Language_Models_CVPR_2024_paper.pdf",
-    "project": "https://opendilab.github.io/LMDrive/",
-    "code": "https://github.com/opendilab/LMDrive",
-    "fit_note": "Language-guided E2E driving, but not a separated dual-branch E2E+VLM design."
   },
   {
     "id": "drivegpt4",
@@ -135,21 +105,6 @@
     "fit_note": "Fits category 1 as VLM-for-driving work; not a dual-branch E2E+VLM paper."
   },
   {
-    "id": "reason2drive",
-    "title": "Reason2Drive: Towards Interpretable and Chain-based Reasoning for Autonomous Driving",
-    "authors": "Ming Nie et al.",
-    "venue": "ECCV",
-    "year": 2024,
-    "summary": "A benchmark and method paper for chain-based VLM reasoning in driving, emphasizing interpretable perception-prediction-reasoning chains.",
-    "tags": [
-      "e2e_vlm_vla_for_ad"
-    ],
-    "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/03786.pdf",
-    "project": "https://github.com/fudan-zvg/reason2drive",
-    "code": "https://github.com/fudan-zvg/reason2drive",
-    "fit_note": "Fits category 1 as a major VLM reasoning paper for AD; not a dual-branch E2E+VLM paper."
-  },
-  {
     "id": "elm",
     "title": "Embodied Understanding of Driving Scenarios",
     "authors": "Yunsong Zhou et al.",
@@ -165,51 +120,49 @@
     "fit_note": "Fits category 1 as VLM/embodied understanding for AD; not a dual-branch E2E+VLM paper."
   },
   {
-    "id": "drivevlm",
-    "title": "DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models",
-    "authors": "Xiaoyu Tian et al.",
-    "venue": "CoRL",
+    "id": "lmdrive",
+    "title": "LMDrive: Closed-Loop End-to-End Driving with Large Language Models",
+    "authors": "Haowei Shao et al.",
+    "venue": "CVPR",
     "year": 2024,
-    "summary": "A major VLM-for-driving paper that also proposes DriveVLM-Dual, a hybrid deployment-oriented system combining a VLM with a second driving stack.",
+    "summary": "A language-guided closed-loop E2E driving framework that adapts a frozen LLM with sensor encoders and adapters for direct control generation.",
     "tags": [
       "e2e_vlm_vla_for_ad"
     ],
-    "pdf": "https://proceedings.mlr.press/v270/tian25c.html",
-    "project": "https://tsinghua-mars-lab.github.io/DriveVLM/",
-    "code": "https://github.com/Tsinghua-MARS-Lab/DriveVLM",
-    "fit_note": "Definitely fits category 1. I do not tag it for category 2 because the companion branch is described as a traditional / hybrid driving stack rather than a clean E2E expert under your stricter definition."
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2024/papers/Shao_LMDrive_Closed-Loop_End-to-End_Driving_with_Large_Language_Models_CVPR_2024_paper.pdf",
+    "project": "https://opendilab.github.io/LMDrive/",
+    "code": "https://github.com/opendilab/LMDrive",
+    "fit_note": "Language-guided E2E driving, but not a separated dual-branch E2E+VLM design."
   },
   {
-    "id": "generalizing_e2e_llm_realworld",
-    "title": "Generalizing End-To-End Autonomous Driving In Real-World Environments Using Zero-Shot LLMs",
-    "authors": "Zeyu Dong et al.",
-    "venue": "CoRL",
+    "id": "reason2drive",
+    "title": "Reason2Drive: Towards Interpretable and Chain-based Reasoning for Autonomous Driving",
+    "authors": "Ming Nie et al.",
+    "venue": "ECCV",
     "year": 2024,
-    "summary": "An efficient closed-loop architecture where a multimodal LLM periodically produces high-level instructions to guide an end-to-end driving model in the real world.",
+    "summary": "A benchmark and method paper for chain-based VLM reasoning in driving, emphasizing interpretable perception-prediction-reasoning chains.",
     "tags": [
-      "e2e_vlm_vla_for_ad",
-      "dual_branch_e2e_vlm_for_ad"
+      "e2e_vlm_vla_for_ad"
     ],
-    "pdf": "https://openreview.net/forum?id=s0vHSq5QEv",
-    "project": "",
-    "code": "",
-    "fit_note": "Fits category 2 because the paper explicitly combines a multimodal LLM branch with an end-to-end driving model, and the LLM is queried at a slower rate than the E2E controller."
+    "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/03786.pdf",
+    "project": "https://github.com/fudan-zvg/reason2drive",
+    "code": "https://github.com/fudan-zvg/reason2drive",
+    "fit_note": "Fits category 1 as a major VLM reasoning paper for AD; not a dual-branch E2E+VLM paper."
   },
   {
-    "id": "solve",
-    "title": "SOLVE: Synergy of Language-Vision and End-to-End Networks for Autonomous Driving",
-    "authors": "Xuesong Chen et al.",
-    "venue": "CVPR",
+    "id": "ssr",
+    "title": "Navigation-Guided Sparse Scene Representation for End-to-End Autonomous Driving",
+    "authors": "Peidong Li et al.",
+    "venue": "ICLR",
     "year": 2025,
-    "summary": "A clear VLM+E2E hybrid that promotes feature-level and trajectory-level cooperation between a VLM branch and an end-to-end model.",
+    "summary": "A recent E2E driving method that uses a sparse navigation-guided scene representation to reduce annotation burden and computation cost.",
     "tags": [
-      "e2e_vlm_vla_for_ad",
-      "dual_branch_e2e_vlm_for_ad"
+      "e2e_vlm_vla_for_ad"
     ],
-    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Chen_SOLVE_Synergy_of_Language-Vision_and_End-to-End_Networks_for_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "pdf": "https://openreview.net/forum?id=Vv76fCYffN",
     "project": "",
-    "code": "",
-    "fit_note": "Strong category 2 match under your definition: it explicitly contains a VLM branch and an E2E branch."
+    "code": "https://github.com/PeidongLi/SSR",
+    "fit_note": "Pure E2E driving paper; fits category 1 only."
   },
   {
     "id": "orion",
@@ -242,20 +195,94 @@
     "fit_note": "Fits category 1 as a strong VLA/VLM-style AD paper; not category 2 because it is not framed as a separate E2E-branch plus VLM-branch system."
   },
   {
-    "id": "autovla",
-    "title": "AutoVLA: A Vision-Language-Action Model for End-to-End Autonomous Driving with Adaptive Reasoning and Reinforcement Fine-Tuning",
-    "authors": "Zewei Zhou et al.",
-    "venue": "NeurIPS",
-    "year": 2025,
-    "summary": "A VLA driving model with fast and slow thinking modes and adaptive reasoning learned through supervised and reinforcement fine-tuning.",
+    "id": "drivevlm",
+    "title": "DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models",
+    "authors": "Xiaoyu Tian et al.",
+    "venue": "CoRL",
+    "year": 2024,
+    "summary": "A CoRL paper on VLM-based autonomous driving that also introduces DriveVLM-Dual, a hybrid deployment combining VLM reasoning with a conventional driving pipeline.",
     "tags": [
-      "e2e_vlm_vla_for_ad",
-      "explicit_switching_for_ad"
+      "dual_branch_e2e_vlm_for_ad"
     ],
-    "pdf": "https://openreview.net/forum?id=28qUA2bSe5",
-    "project": "https://autovla.github.io/",
+    "pdf": "https://proceedings.mlr.press/v270/tian25c.html",
+    "project": "https://tsinghua-mars-lab.github.io/DriveVLM/",
+    "code": "https://github.com/Tsinghua-MARS-Lab/DriveVLM",
+    "fit_note": "Includes DriveVLM-Dual, a hybrid system that combines a VLM stack with a traditional driving pipeline; best fit for category 2."
+  },
+  {
+    "id": "generalizing_e2e_llm_realworld",
+    "title": "Generalizing End-To-End Autonomous Driving In Real-World Environments Using Zero-Shot LLMs",
+    "authors": "Zeyu Dong et al.",
+    "venue": "CoRL",
+    "year": 2024,
+    "summary": "An efficient closed-loop architecture where a multimodal LLM periodically produces high-level instructions to guide an end-to-end driving model in the real world.",
+    "tags": [
+      "dual_branch_e2e_vlm_for_ad"
+    ],
+    "pdf": "https://openreview.net/forum?id=s0vHSq5QEv",
+    "project": "",
     "code": "",
-    "fit_note": "Fits category 3 because it explicitly supports adaptive switching between fast and slow reasoning modes."
+    "fit_note": "Fits category 2 because the paper explicitly combines a multimodal LLM branch with an end-to-end driving model, and the LLM is queried at a slower rate than the E2E controller."
+  },
+  {
+    "id": "senna",
+    "title": "Senna: Bridging Large Vision-Language Models and End-to-End Autonomous Driving",
+    "authors": "Bo Jiang, Shaoyu Chen, Bencheng Liao, Xingyu Zhang, Wei Yin, Qian Zhang, Chang Huang, Wenyu Liu, and Xinggang Wang",
+    "venue": "arXiv",
+    "year": 2024,
+    "summary": "A hybrid driving system that explicitly combines an LVLM (Senna-VLM) with an end-to-end model (Senna-E2E), decoupling high-level language planning from low-level trajectory prediction.",
+    "tags": [
+      "dual_branch_e2e_vlm_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2410.22313",
+    "project": "https://github.com/hustvl/Senna",
+    "code": "https://github.com/hustvl/Senna",
+    "fit_note": "Directly matches category 2: one LVLM branch for high-level planning and one E2E branch for trajectory prediction. Not used in category 3 because it does not center on an explicit switching trigger."
+  },
+  {
+    "id": "dima",
+    "title": "Distilling Multi-modal Large Language Models for Autonomous Driving",
+    "authors": "Deepti Hegde, Rajeev Yasarla, Hong Cai, Shizhong Han, Apratim Bhattacharyya, Shweta Mahajan, Litian Liu, Risheek Garrepalli, Vishal M. Patel, and Fatih Porikli",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "A CVPR 2025 framework that jointly trains a multi-modal LLM branch and a vision-based end-to-end planner, distilling the former into the latter to preserve efficiency.",
+    "tags": [
+      "dual_branch_e2e_vlm_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Hegde_Distilling_Multi-modal_Large_Language_Models_for_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 because the method explicitly contains both an MLLM planning branch and a vision-based E2E planner under joint training. It is not category 3 because the paper does not frame its contribution as explicit online switching."
+  },
+  {
+    "id": "solve",
+    "title": "SOLVE: Synergy of Language-Vision and End-to-End Networks for Autonomous Driving",
+    "authors": "Xuesong Chen et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "A clear VLM+E2E hybrid that promotes feature-level and trajectory-level cooperation between a VLM branch and an end-to-end model.",
+    "tags": [
+      "dual_branch_e2e_vlm_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Chen_SOLVE_Synergy_of_Language-Vision_and_End-to-End_Networks_for_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Strong category 2 match under your definition: it explicitly contains a VLM branch and an E2E branch."
+  },
+  {
+    "id": "recogdrive",
+    "title": "ReCogDrive: A Reinforced Cognitive Framework for End-to-End Autonomous Driving",
+    "authors": "Yongkang Li, Kaixin Xiong, Xiangyu Guo, Fang Li, Sixu Yan, Gangwei Xu, Lijun Zhou, Long Chen, Haiyang Sun, Bing Wang, Kun Ma, Guang Chen, Hangjun Ye, Wenyu Liu, and Xinggang Wang",
+    "venue": "ICLR",
+    "year": 2026,
+    "summary": "An ICLR 2026 framework that integrates a cognitive VLM / autoregressive reasoning model with a diffusion-based end-to-end planner, then further refines the planner with reinforcement learning.",
+    "tags": [
+      "dual_branch_e2e_vlm_for_ad"
+    ],
+    "pdf": "https://openreview.net/forum?id=JoXwhGbuMi",
+    "project": "https://github.com/xiaomi-research/recogdrive",
+    "code": "https://github.com/xiaomi-research/recogdrive",
+    "fit_note": "Fits category 2 because it explicitly combines a VLM reasoning component with a separate diffusion planner for end-to-end trajectory generation. It is not category 3 because expert selection is not its main switching mechanism."
   },
   {
     "id": "leapad",
@@ -286,6 +313,21 @@
     "project": "",
     "code": "",
     "fit_note": "Strong category 3 fit, but currently arXiv only."
+  },
+  {
+    "id": "autovla",
+    "title": "AutoVLA: A Vision-Language-Action Model for End-to-End Autonomous Driving with Adaptive Reasoning and Reinforcement Fine-Tuning",
+    "authors": "Zewei Zhou et al.",
+    "venue": "NeurIPS",
+    "year": 2025,
+    "summary": "A VLA driving model with fast and slow thinking modes and adaptive reasoning learned through supervised and reinforcement fine-tuning.",
+    "tags": [
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://openreview.net/forum?id=28qUA2bSe5",
+    "project": "https://autovla.github.io/",
+    "code": "",
+    "fit_note": "Fits category 3 because it explicitly supports adaptive switching between fast and slow reasoning modes."
   },
   {
     "id": "de_driver",
