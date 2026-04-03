@@ -202,7 +202,7 @@
     "year": 2024,
     "summary": "A CoRL paper on VLM-based autonomous driving that also introduces DriveVLM-Dual, a hybrid deployment combining VLM reasoning with a conventional driving pipeline.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://proceedings.mlr.press/v270/tian25c.html",
     "project": "https://tsinghua-mars-lab.github.io/DriveVLM/",
@@ -217,7 +217,7 @@
     "year": 2024,
     "summary": "An efficient closed-loop architecture where a multimodal LLM periodically produces high-level instructions to guide an end-to-end driving model in the real world.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://openreview.net/forum?id=s0vHSq5QEv",
     "project": "",
@@ -232,7 +232,7 @@
     "year": 2024,
     "summary": "A hybrid driving system that explicitly combines an LVLM (Senna-VLM) with an end-to-end model (Senna-E2E), decoupling high-level language planning from low-level trajectory prediction.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://arxiv.org/abs/2410.22313",
     "project": "https://github.com/hustvl/Senna",
@@ -247,7 +247,7 @@
     "year": 2025,
     "summary": "A CVPR 2025 framework that jointly trains a multi-modal LLM branch and a vision-based end-to-end planner, distilling the former into the latter to preserve efficiency.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Hegde_Distilling_Multi-modal_Large_Language_Models_for_Autonomous_Driving_CVPR_2025_paper.pdf",
     "project": "",
@@ -262,7 +262,7 @@
     "year": 2025,
     "summary": "A clear VLM+E2E hybrid that promotes feature-level and trajectory-level cooperation between a VLM branch and an end-to-end model.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Chen_SOLVE_Synergy_of_Language-Vision_and_End-to-End_Networks_for_Autonomous_Driving_CVPR_2025_paper.pdf",
     "project": "",
@@ -277,7 +277,7 @@
     "year": 2026,
     "summary": "An ICLR 2026 framework that integrates a cognitive VLM / autoregressive reasoning model with a diffusion-based end-to-end planner, then further refines the planner with reinforcement learning.",
     "tags": [
-      "dual_branch_e2e_vlm_for_ad"
+      "double_branch_for_ad"
     ],
     "pdf": "https://openreview.net/forum?id=JoXwhGbuMi",
     "project": "https://github.com/xiaomi-research/recogdrive",
@@ -343,5 +343,431 @@
     "project": "",
     "code": "",
     "fit_note": "Very strong category 3 fit because it has an explicit scene-aware routing mechanism, but it is still a submission rather than an archival publication."
+  },
+  {
+    "id": "tcp",
+    "title": "Trajectory-guided Control Prediction for End-to-end Autonomous Driving: A Simple yet Strong Baseline",
+    "authors": "Penghao Wu et al.",
+    "venue": "NeurIPS",
+    "year": 2022,
+    "summary": "A strong CARLA baseline that jointly models a trajectory branch and a control branch. It is useful both as an end-to-end reference and as an early double-branch design.",
+    "tags": [
+      "e2e_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2206.08129",
+    "project": "https://github.com/OpenDriveLab/TCP",
+    "code": "https://github.com/OpenDriveLab/TCP",
+    "fit_note": "Fits category 1 as E2E driving and category 3 under the broadened double-branch definition."
+  },
+  {
+    "id": "reasonnet",
+    "title": "End-to-End Driving With Temporal and Global Reasoning",
+    "authors": "Hao Shao et al.",
+    "venue": "CVPR",
+    "year": 2023,
+    "summary": "An end-to-end driving framework that emphasizes temporal reasoning and global scene understanding for improved planning robustness.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2023/papers/Shao_ReasonNet_End-to-End_Driving_With_Temporal_and_Global_Reasoning_CVPR_2023_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Pure E2E driving paper; a useful planning and reasoning baseline."
+  },
+  {
+    "id": "genad",
+    "title": "GenAD: Generative End-to-End Autonomous Driving",
+    "authors": "Wenzhao Zheng et al.",
+    "venue": "ECCV",
+    "year": 2024,
+    "summary": "A generative end-to-end driving framework that models future traffic evolution and trajectory generation in a latent space.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/08174.pdf",
+    "project": "https://github.com/wzzheng/GenAD",
+    "code": "https://github.com/wzzheng/GenAD",
+    "fit_note": "Fits category 1 as a representative generative E2E planner."
+  },
+  {
+    "id": "bridgead",
+    "title": "Bridging Past and Future: End-to-End Autonomous Driving with Historical Prediction and Planning",
+    "authors": "Binghao Zhang et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "An E2E planning framework that uses historical prediction and multi-step future planning queries to better align motion reasoning with planning.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Bridging_Past_and_Future_End-to-End_Autonomous_Driving_with_Historical_Prediction_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 1 and strengthens the history-aware planning line."
+  },
+  {
+    "id": "diffusiondrive",
+    "title": "DiffusionDrive: Truncated Diffusion Model for End-to-End Autonomous Driving",
+    "authors": "Bencheng Liao et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "A diffusion-based end-to-end planner that truncates denoising steps for high-quality multi-modal planning at practical inference speed.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Liao_DiffusionDrive_Truncated_Diffusion_Model_for_End-to-End_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "project": "https://github.com/hustvl/DiffusionDrive",
+    "code": "https://github.com/hustvl/DiffusionDrive",
+    "fit_note": "Fits category 1 as a major generative E2E driving work."
+  },
+  {
+    "id": "world4drive",
+    "title": "World4Drive: End-to-End Autonomous Driving via Intention-aware Physical Latent World Model",
+    "authors": "Yupeng Zheng et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "An E2E framework that builds a latent world model for multi-modal planning and trajectory selection without dense perception annotation.",
+    "tags": [
+      "e2e_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2507.00603",
+    "project": "https://github.com/ucaszyp/World4Drive",
+    "code": "https://github.com/ucaszyp/World4Drive",
+    "fit_note": "Fits category 1 and can also be viewed as category 3 because it couples trajectory generation with a world-model-based selector."
+  },
+  {
+    "id": "momad",
+    "title": "Don't Shake the Wheel: Momentum-Aware Planning in End-to-End Autonomous Driving",
+    "authors": "Zhiyuan Song et al.",
+    "venue": "CVPR",
+    "year": 2025,
+    "summary": "An end-to-end driving method that introduces trajectory momentum and perception momentum to stabilize planning over time.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/CVPR2025/papers/Song_Dont_Shake_the_Wheel_Momentum-Aware_Planning_in_End-to-End_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 1 as a recent E2E planning improvement."
+  },
+  {
+    "id": "learning_by_cheating",
+    "title": "Learning by Cheating",
+    "authors": "Dian Chen et al.",
+    "venue": "CoRL",
+    "year": 2020,
+    "summary": "A classic vision-based driving paper that uses a privileged teacher and a vision student, making it a strong historical reference for E2E driving.",
+    "tags": [
+      "e2e_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://proceedings.mlr.press/v100/chen20a/chen20a.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Historical E2E reference. Under the broadened category 3 definition, the teacher-student decomposition also makes it relevant to double-system thinking."
+  },
+  {
+    "id": "world_on_rails",
+    "title": "Learning To Drive From a World on Rails",
+    "authors": "Dian Chen et al.",
+    "venue": "ICCV",
+    "year": 2021,
+    "summary": "A model-based vision driving approach that uses a world model to evaluate future trajectories and supervise the final policy.",
+    "tags": [
+      "e2e_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Learning_To_Drive_From_a_World_on_Rails_ICCV_2021_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 1 and is also useful for your world-model-oriented storyline."
+  },
+  {
+    "id": "neat",
+    "title": "NEAT: Neural Attention Fields for End-to-End Autonomous Driving",
+    "authors": "Kashyap Chitta et al.",
+    "venue": "ICCV",
+    "year": 2021,
+    "summary": "An end-to-end driving method that uses neural attention fields to build a compact BEV-style representation from images for planning.",
+    "tags": [
+      "e2e_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2021/papers/Chitta_NEAT_Neural_Attention_Fields_for_End-to-End_Autonomous_Driving_ICCV_2021_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Pure E2E driving paper; good as an interpretable representation baseline."
+  },
+  {
+    "id": "drivemlm",
+    "title": "DriveMLM: Aligning Multi-Modal Large Language Models with Behavioral Planning States for Autonomous Driving",
+    "authors": "Wuqi Wang et al.",
+    "venue": "arXiv",
+    "year": 2023,
+    "summary": "An LLM-based autonomous driving framework that maps structured planning states into a language-friendly interface for closed-loop driving.",
+    "tags": [
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2312.09245",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 as a representative LLM-for-driving decision framework."
+  },
+  {
+    "id": "drivecot",
+    "title": "DriveCoT: Integrating Chain-of-Thought Reasoning with End-to-End Driving",
+    "authors": "Tianyu Wang et al.",
+    "venue": "arXiv",
+    "year": 2024,
+    "summary": "A driving framework and dataset that expose chain-of-thought style supervision for interpretable end-to-end driving decisions.",
+    "tags": [
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2403.16996",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 because it explicitly introduces CoT-style reasoning into driving."
+  },
+  {
+    "id": "dilu",
+    "title": "DiLu: A Knowledge-Driven Approach to Autonomous Driving with Large Language Models",
+    "authors": "Licheng Wen et al.",
+    "venue": "ICLR",
+    "year": 2024,
+    "summary": "A knowledge-driven LLM agent for autonomous driving with reasoning, reflection, and memory components.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2309.16292",
+    "project": "https://pjlab-adg.github.io/DiLu/",
+    "code": "",
+    "fit_note": "Fits category 2. Under the broadened definition, its reasoning-plus-memory structure also makes it relevant to category 3."
+  },
+  {
+    "id": "agent_driver",
+    "title": "A Language Agent for Autonomous Driving",
+    "authors": "Jiageng Mao et al.",
+    "venue": "ICLR",
+    "year": 2024,
+    "summary": "An LLM-powered driving agent with a tool library, cognitive memory, and a reasoning engine for high-level autonomous driving decisions.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2311.10813",
+    "project": "https://psi-lab.ai/Agent-Driver/",
+    "code": "",
+    "fit_note": "Fits category 2 and is also relevant to category 3 because it combines tool use, memory, and reasoning as distinct subsystems."
+  },
+  {
+    "id": "driveagent",
+    "title": "DriveAgent: Multi-Agent Structured Reasoning with LLM and Multimodal Sensor Fusion for Autonomous Driving",
+    "authors": "Xinmeng Hou et al.",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A multi-agent LLM framework that combines multimodal sensor fusion with specialized reasoning agents for driving analysis and decision generation.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2505.02123",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 and also category 3 because its multi-agent structure is naturally a multi-branch reasoning system."
+  },
+  {
+    "id": "hint_ad",
+    "title": "Hint-AD: Holistically Aligned Interpretability in End-to-End Autonomous Driving",
+    "authors": "Kairui Ding et al.",
+    "venue": "arXiv",
+    "year": 2024,
+    "summary": "An AD-language system that aligns natural-language explanations with perception, prediction, and planning outputs of an end-to-end driving model.",
+    "tags": [
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2409.06702",
+    "project": "https://air-discover.github.io/Hint-AD/",
+    "code": "",
+    "fit_note": "Fits category 2 as an interpretability-oriented AD-language paper."
+  },
+  {
+    "id": "futuresightdrive",
+    "title": "FutureSightDrive: Thinking Visually with Spatio-Temporal CoT for Autonomous Driving",
+    "authors": "Shuang Zeng et al.",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A VLM-style driving framework that uses spatio-temporal chain-of-thought reasoning to improve autonomous driving decisions.",
+    "tags": [
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2505.17685",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 as a reasoning-heavy VLM paper for AD."
+  },
+  {
+    "id": "eta",
+    "title": "ETA: Efficiency through Thinking Ahead, A Dual Approach to Self-Driving with Large Models",
+    "authors": "Shady Hamdan et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "An asynchronous dual-system design that combines a small fast model for current frames with a larger model that thinks ahead on past frames.",
+    "tags": [
+      "double_branch_for_ad",
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2025/papers/Hamdan_ETA_Efficiency_through_Thinking_Ahead_A_Dual_Approach_to_Self-Driving_ICCV_2025_paper.pdf",
+    "project": "https://github.com/opendrivelab/ETA",
+    "code": "https://github.com/opendrivelab/ETA",
+    "fit_note": "Strong fit for categories 3 and 4 under the broadened definition."
+  },
+  {
+    "id": "adadrive",
+    "title": "AdaDrive: Self-Adaptive Slow-Fast System for Language-Grounded Autonomous Driving",
+    "authors": "Ruifei Zhang et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "A slow-fast driving framework that learns when to activate an LLM and how much its output should influence final planning.",
+    "tags": [
+      "double_branch_for_ad",
+      "explicit_switching_for_ad",
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zhang_AdaDrive_Self-Adaptive_Slow-Fast_System_for_Language-Grounded_Autonomous_Driving_ICCV_2025_paper.pdf",
+    "project": "https://github.com/ReaFly/AdaDrive",
+    "code": "https://github.com/ReaFly/AdaDrive",
+    "fit_note": "Very strong fit for categories 2, 3, and 4."
+  },
+  {
+    "id": "fasionad",
+    "title": "FASIONAD: FAst and Slow FusION Thinking Systems for Human-Like Autonomous Driving with Adaptive Feedback",
+    "authors": "Kangan Qian et al.",
+    "venue": "arXiv",
+    "year": 2024,
+    "summary": "A dual-system framework inspired by fast and slow thinking, with a fast planner, a slow reasoning system, and dynamic switching between them.",
+    "tags": [
+      "double_branch_for_ad",
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2411.18013",
+    "project": "",
+    "code": "",
+    "fit_note": "Strong fit for categories 3 and 4."
+  },
+  {
+    "id": "fasionad_pp",
+    "title": "FASIONAD++: Integrating High-Level Instruction and Adaptive Uncertainty for Fast and Slow Thinking Autonomous Driving",
+    "authors": "Kangan Qian et al.",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "An upgraded fast-slow driving framework that adds uncertainty-triggered slow reasoning and high-level instruction feedback to improve planning.",
+    "tags": [
+      "double_branch_for_ad",
+      "explicit_switching_for_ad",
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2503.08162",
+    "project": "",
+    "code": "",
+    "fit_note": "Strong fit for categories 3 and 4, and also relevant to category 2 because the slow branch is language-and-vision guided."
+  },
+  {
+    "id": "driveagent_r1",
+    "title": "DriveAgent-R1: Advancing VLM-based Autonomous Driving with Hybrid Thinking and Active Perception",
+    "authors": "Weicheng Zheng et al.",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A VLM driving agent with hybrid thinking that adaptively switches between lightweight text reasoning and more in-depth tool-based analysis.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2507.20879",
+    "project": "",
+    "code": "",
+    "fit_note": "Strong fit for categories 2 and 4."
+  },
+  {
+    "id": "vlms_guided_interpretable_decision",
+    "title": "VLMs Guided Interpretable Decision Making for Autonomous Driving",
+    "authors": "Xin Hu et al.",
+    "venue": "WACV",
+    "year": 2026,
+    "summary": "A multimodal decision-making framework that uses VLM-generated semantics and post-hoc VLM refinement to improve reliability and interpretability.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://openaccess.thecvf.com/content/WACV2026/papers/Hu_VLMs_Guided_Interpretable_Decision_Making_in_Autonomous_Driving_WACV_2026_paper.pdf",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 and is relevant to category 3 because it explicitly combines a base predictor with VLM-guided semantic enhancement and refinement."
+  },
+  {
+    "id": "hydra_next",
+    "title": "Hydra-NeXt: Robust Closed-Loop Driving with Open-Loop Training",
+    "authors": "Zhenxin Li et al.",
+    "venue": "ICCV",
+    "year": 2025,
+    "summary": "A multi-branch planning framework that unifies trajectory prediction, control prediction, and trajectory refinement in one closed-loop driving system.",
+    "tags": [
+      "e2e_for_ad",
+      "double_branch_for_ad"
+    ],
+    "pdf": "https://www.openaccess.thecvf.com/content/ICCV2025/papers/Li_Hydra-NeXt_Robust_Closed-Loop_Driving_with_Open-Loop_Training_ICCV_2025_paper.pdf",
+    "project": "https://github.com/woxihuanjiangguo/Hydra-NeXt",
+    "code": "https://github.com/woxihuanjiangguo/Hydra-NeXt",
+    "fit_note": "Fits category 1 and category 3 because it is explicitly multi-branch."
+  },
+  {
+    "id": "fastdrivecot",
+    "title": "Accelerating Structured Chain-of-Thought in Autonomous Vehicles",
+    "authors": "Yi Gu et al.",
+    "venue": "arXiv",
+    "year": 2026,
+    "summary": "A method for accelerating structured chain-of-thought in autonomous driving, aimed at making reasoning-rich VLA systems practical at inference time.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2602.02864",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits category 2 and is relevant to category 4 because it directly targets adaptive, practical reasoning cost in driving."
+  },
+  {
+    "id": "human_centric_fast_slow",
+    "title": "Towards Human-Centric Autonomous Driving: A Fast-Slow Architecture Integrating Large Language Model Guidance with Reinforcement Learning",
+    "authors": "Chengkai Xu et al.",
+    "venue": "arXiv",
+    "year": 2025,
+    "summary": "A fast-slow driving architecture in which an LLM provides high-level guidance while an RL agent handles low-latency maneuvers.",
+    "tags": [
+      "double_branch_for_ad",
+      "explicit_switching_for_ad",
+      "vlm_vla_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2505.06875",
+    "project": "",
+    "code": "",
+    "fit_note": "Fits categories 2, 3, and 4 under the broadened definition."
+  },
+  {
+    "id": "samoe_vla",
+    "title": "SAMoE-VLA: A Scene Adaptive Mixture-of-Experts Vision-Language-Action Model for Autonomous Driving",
+    "authors": "Zihan You et al.",
+    "venue": "arXiv",
+    "year": 2026,
+    "summary": "A scene-adaptive Mixture-of-Experts VLA model that routes computation based on structured scene context rather than token-only signals.",
+    "tags": [
+      "vlm_vla_for_ad",
+      "double_branch_for_ad",
+      "explicit_switching_for_ad"
+    ],
+    "pdf": "https://arxiv.org/abs/2603.08113",
+    "project": "",
+    "code": "",
+    "fit_note": "Very strong fit for categories 2, 3, and 4 because it centers on scene-level expert routing."
   }
 ]
