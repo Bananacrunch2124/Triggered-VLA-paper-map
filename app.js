@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const STORAGE_KEY = "triggered_vla_paper_map_layout_v1";
+  const STORAGE_KEY = "triggered_vla_paper_map_layout_v2";
   const THEME_KEY = "triggered_vla_paper_map_theme_v1";
 
-  const BOARD_BASE_WIDTH = 2400;
-  const BOARD_BASE_HEIGHT = 1600;
+  const BOARD_MIN_WIDTH = 3200;
+  const BOARD_MIN_HEIGHT = 2200;
+  const BOARD_PADDING = 800;
+  const ITEM_WIDTH = 280;
+  const ITEM_HEIGHT = 180;
+
   const ZOOM_MIN = 0.5;
   const ZOOM_MAX = 2.0;
   const ZOOM_STEP = 0.1;
@@ -67,7 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedItemId: null,
     currentPaperModalId: null,
     editingNoteId: null,
-    zoom: 1
+    zoom: 1,
+    canvasWidth: BOARD_MIN_WIDTH,
+    canvasHeight: BOARD_MIN_HEIGHT
   };
 
   function clamp(value, min, max) {
@@ -75,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showToast(message) {
+    if (!toast) return;
     toast.textContent = message;
     toast.classList.remove("hidden");
     clearTimeout(showToast._timer);
@@ -87,7 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const payload = {
       boardItems: state.boardItems,
       connections: state.connections,
-      zoom: state.zoom
+      zoom: state.zoom,
+      canvasWidth: state.canvasWidth,
+      canvasHeight: state.canvasHeight
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   }
@@ -106,6 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (typeof parsed.zoom === "number") {
         state.zoom = clamp(parsed.zoom, ZOOM_MIN, ZOOM_MAX);
+      }
+      if (typeof parsed.canvasWidth === "number") {
+        state.canvasWidth = Math.max(BOARD_MIN_WIDTH, parsed.canvasWidth);
+      }
+      if (typeof parsed.canvasHeight === "number") {
+        state.canvasHeight = Math.max(BOARD_MIN_HEIGHT, parsed.canvasHeight);
       }
     } catch (error) {
       console.error("Failed to load layout:", error);
@@ -152,10 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCounts() {
-    paperCount.textContent = `${getFilteredPapers().length} papers`;
-    boardCount.textContent = `${state.boardItems.length} on board`;
-    emptyBoardHint.classList.toggle("hidden", state.boardItems.length > 0);
-    zoomIndicator.textContent = `${Math.round(state.zoom * 100)}%`;
+    if (paperCount) {
+      paperCount.textContent = `${getFilteredPapers().length} papers`;
+    }
+    if (boardCount) {
+      boardCount.textContent = `${state.boardItems.length} on board`;
+    }
+    if (emptyBoardHint) {
+      emptyBoardHint.classList.toggle("hidden", state.boardItems.length > 0);
+    }
+    if (zoomIndicator) {
+      zoomIndicator.textContent = `${Math.round(state.zoom * 100)}%`;
+    }
   }
 
   function getPaperById(paperId) {
@@ -179,8 +202,44 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll("'", "&#39;");
   }
 
+  function normalizeCanvasSize() {
+    let requiredWidth = BOARD_MIN_WIDTH;
+    let requiredHeight = BOARD_MIN_HEIGHT;
+
+    state.boardItems.forEach((item) => {
+      const x = Number(item.x) || 0;
+      const y = Number(item.y) || 0;
+      requiredWidth = Math.max(requiredWidth, x + ITEM_WIDTH + BOARD_PADDING);
+      requiredHeight = Math.max(requiredHeight, y + ITEM_HEIGHT + BOARD_PADDING);
+    });
+
+    state.canvasWidth = requiredWidth;
+    state.canvasHeight = requiredHeight;
+  }
+
+  function ensureCanvasFits(x, y, width = ITEM_WIDTH, height = ITEM_HEIGHT) {
+    const needWidth = Math.max(BOARD_MIN_WIDTH, Math.ceil(x + width + BOARD_PADDING));
+    const needHeight = Math.max(BOARD_MIN_HEIGHT, Math.ceil(y + height + BOARD_PADDING));
+
+    let changed = false;
+
+    if (needWidth > state.canvasWidth) {
+      state.canvasWidth = needWidth;
+      changed = true;
+    }
+
+    if (needHeight > state.canvasHeight) {
+      state.canvasHeight = needHeight;
+      changed = true;
+    }
+
+    return changed;
+  }
+
   function renderPaperList() {
     const papers = getFilteredPapers();
+
+    if (!paperList) return;
 
     if (!papers.length) {
       paperList.innerHTML = `<div class="paper-list-placeholder">No papers found.</div>`;
@@ -235,13 +294,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getDefaultBoardPosition(index = 0) {
-    const cols = 4;
-    const cardWidth = 280;
-    const cardHeight = 180;
-    const gapX = 34;
-    const gapY = 30;
-    const startX = 40;
-    const startY = 40;
+    const cols = 5;
+    const cardWidth = 320;
+    const cardHeight = 220;
+    const gapX = 50;
+    const gapY = 40;
+    const startX = 80;
+    const startY = 80;
 
     const col = index % cols;
     const row = Math.floor(index / cols);
@@ -253,13 +312,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateBoardCanvasSize() {
-    boardCanvas.style.width = `${BOARD_BASE_WIDTH * state.zoom}px`;
-    boardCanvas.style.height = `${BOARD_BASE_HEIGHT * state.zoom}px`;
+    normalizeCanvasSize();
+    if (!boardCanvas) return;
+    boardCanvas.style.width = `${state.canvasWidth * state.zoom}px`;
+    boardCanvas.style.height = `${state.canvasHeight * state.zoom}px`;
   }
 
   function setZoom(nextZoom) {
     state.zoom = clamp(Number(nextZoom) || 1, ZOOM_MIN, ZOOM_MAX);
-    console.log("zoom =", state.zoom);
     saveLayout();
     renderBoard();
   }
@@ -299,13 +359,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const dx = (event.clientX - startX) / state.zoom;
       const dy = (event.clientY - startY) / state.zoom;
 
-      const maxX = BOARD_BASE_WIDTH - 280;
-      const maxY = BOARD_BASE_HEIGHT - 140;
+      item.x = Math.max(0, originX + dx);
+      item.y = Math.max(0, originY + dy);
 
-      item.x = Math.max(0, Math.min(maxX, originX + dx));
-      item.y = Math.max(0, Math.min(maxY, originY + dy));
-
+      const expanded = ensureCanvasFits(item.x, item.y);
       renderBoard();
+
+      if (expanded && board) {
+        board.scrollLeft = Math.max(board.scrollLeft, item.x * state.zoom - 300);
+        board.scrollTop = Math.max(board.scrollTop, item.y * state.zoom - 200);
+      }
     });
 
     window.addEventListener("mouseup", () => {
@@ -321,32 +384,41 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!paper) return;
 
     state.currentPaperModalId = paperId;
-    paperModalTitle.textContent = paper.title || "Paper";
-    paperModalVenue.textContent = paper.venue || "Venue";
-    paperModalYear.textContent = String(paper.year || "Year");
-    paperModalTags.textContent =
-      Array.isArray(paper.tags) && paper.tags.length ? paper.tags.join(", ") : "No tags";
-    paperModalAuthors.textContent = paper.authors || "";
-    paperModalSummary.textContent = paper.summary || "";
+    if (paperModalTitle) paperModalTitle.textContent = paper.title || "Paper";
+    if (paperModalVenue) paperModalVenue.textContent = paper.venue || "Venue";
+    if (paperModalYear) paperModalYear.textContent = String(paper.year || "Year");
+    if (paperModalTags) {
+      paperModalTags.textContent =
+        Array.isArray(paper.tags) && paper.tags.length ? paper.tags.join(", ") : "No tags";
+    }
+    if (paperModalAuthors) paperModalAuthors.textContent = paper.authors || "";
+    if (paperModalSummary) paperModalSummary.textContent = paper.summary || "";
 
     setModalLink(paperModalPdf, paper.pdf);
     setModalLink(paperModalProject, paper.project);
     setModalLink(paperModalCode, paper.code);
 
     const onBoard = isPaperOnBoard(paperId);
-    addPaperToBoardBtn.textContent = onBoard ? "Already on Board" : "Add to Board";
-    removePaperFromBoardBtn.disabled = !onBoard;
-    removePaperFromBoardBtn.style.opacity = onBoard ? "1" : "0.5";
+    if (addPaperToBoardBtn) {
+      addPaperToBoardBtn.textContent = onBoard ? "Already on Board" : "Add to Board";
+    }
+    if (removePaperFromBoardBtn) {
+      removePaperFromBoardBtn.disabled = !onBoard;
+      removePaperFromBoardBtn.style.opacity = onBoard ? "1" : "0.5";
+    }
 
-    paperModal.classList.remove("hidden");
+    if (paperModal) {
+      paperModal.classList.remove("hidden");
+    }
   }
 
   function closePaperModal() {
-    paperModal.classList.add("hidden");
+    if (paperModal) paperModal.classList.add("hidden");
     state.currentPaperModalId = null;
   }
 
   function setModalLink(anchor, href) {
+    if (!anchor) return;
     if (href) {
       anchor.href = href;
       anchor.style.pointerEvents = "auto";
@@ -364,41 +436,51 @@ document.addEventListener("DOMContentLoaded", () => {
     if (noteId) {
       const item = getBoardItemById(noteId);
       if (!item) return;
-      noteModalTitle.textContent = "Edit Note";
-      noteTitleInput.value = item.title || "";
-      noteTextInput.value = item.text || "";
-      deleteNoteBtn.classList.remove("hidden");
+      if (noteModalTitle) noteModalTitle.textContent = "Edit Note";
+      if (noteTitleInput) noteTitleInput.value = item.title || "";
+      if (noteTextInput) noteTextInput.value = item.text || "";
+      if (deleteNoteBtn) deleteNoteBtn.classList.remove("hidden");
     } else {
-      noteModalTitle.textContent = "Add Note";
-      noteTitleInput.value = "";
-      noteTextInput.value = "";
-      deleteNoteBtn.classList.add("hidden");
-      noteModal.dataset.newX = String(x);
-      noteModal.dataset.newY = String(y);
+      if (noteModalTitle) noteModalTitle.textContent = "Add Note";
+      if (noteTitleInput) noteTitleInput.value = "";
+      if (noteTextInput) noteTextInput.value = "";
+      if (deleteNoteBtn) deleteNoteBtn.classList.add("hidden");
+      if (noteModal) {
+        noteModal.dataset.newX = String(x);
+        noteModal.dataset.newY = String(y);
+      }
     }
 
-    noteModal.classList.remove("hidden");
+    if (noteModal) noteModal.classList.remove("hidden");
   }
 
   function closeNoteModal() {
-    noteModal.classList.add("hidden");
+    if (noteModal) {
+      noteModal.classList.add("hidden");
+      delete noteModal.dataset.newX;
+      delete noteModal.dataset.newY;
+    }
     state.editingNoteId = null;
-    delete noteModal.dataset.newX;
-    delete noteModal.dataset.newY;
   }
 
   function openExportModal() {
     const payload = {
       boardItems: state.boardItems,
       connections: state.connections,
-      zoom: state.zoom
+      zoom: state.zoom,
+      canvasWidth: state.canvasWidth,
+      canvasHeight: state.canvasHeight
     };
-    exportTextarea.value = JSON.stringify(payload, null, 2);
-    exportModal.classList.remove("hidden");
+    if (exportTextarea) {
+      exportTextarea.value = JSON.stringify(payload, null, 2);
+    }
+    if (exportModal) {
+      exportModal.classList.remove("hidden");
+    }
   }
 
   function closeExportModal() {
-    exportModal.classList.add("hidden");
+    if (exportModal) exportModal.classList.add("hidden");
   }
 
   function addPaperToBoard(paperId, x = null, y = null) {
@@ -415,6 +497,8 @@ document.addEventListener("DOMContentLoaded", () => {
       x === null || y === null
         ? getDefaultBoardPosition(state.boardItems.length)
         : { x, y };
+
+    ensureCanvasFits(pos.x, pos.y);
 
     state.boardItems.push({
       id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
@@ -457,8 +541,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function saveNoteFromModal() {
-    const title = noteTitleInput.value.trim() || "Note";
-    const text = noteTextInput.value.trim();
+    const title = noteTitleInput?.value.trim() || "Note";
+    const text = noteTextInput?.value.trim() || "";
 
     if (state.editingNoteId) {
       const item = getBoardItemById(state.editingNoteId);
@@ -466,8 +550,10 @@ document.addEventListener("DOMContentLoaded", () => {
       item.title = title;
       item.text = text;
     } else {
-      const x = Number(noteModal.dataset.newX || 80);
-      const y = Number(noteModal.dataset.newY || 80);
+      const x = Number(noteModal?.dataset.newX || 80);
+      const y = Number(noteModal?.dataset.newY || 80);
+
+      ensureCanvasFits(x, y);
 
       state.boardItems.push({
         id: `note_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
@@ -530,6 +616,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderConnections() {
+    if (!boardCanvas || !connectionSvg) return;
+
     const canvasRect = boardCanvas.getBoundingClientRect();
 
     const lines = state.connections
@@ -561,6 +649,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderBoard() {
+    if (!boardItemsLayer) return;
+
     updateBoardCanvasSize();
 
     boardItemsLayer.innerHTML = state.boardItems
@@ -629,6 +719,8 @@ document.addEventListener("DOMContentLoaded", () => {
     state.papers.forEach((paper) => {
       if (!isPaperOnBoard(paper.id)) {
         const pos = getDefaultBoardPosition(state.boardItems.length);
+        ensureCanvasFits(pos.x, pos.y);
+
         state.boardItems.push({
           id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
           type: "paper",
@@ -677,6 +769,8 @@ document.addEventListener("DOMContentLoaded", () => {
     state.boardItems = [];
     state.connections = [];
     state.selectedItemId = null;
+    state.canvasWidth = BOARD_MIN_WIDTH;
+    state.canvasHeight = BOARD_MIN_HEIGHT;
     saveLayout();
     renderPaperList();
     renderBoard();
@@ -700,6 +794,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof parsed.zoom === "number") {
         state.zoom = clamp(parsed.zoom, ZOOM_MIN, ZOOM_MAX);
       }
+      if (typeof parsed.canvasWidth === "number") {
+        state.canvasWidth = Math.max(BOARD_MIN_WIDTH, parsed.canvasWidth);
+      } else {
+        state.canvasWidth = BOARD_MIN_WIDTH;
+      }
+      if (typeof parsed.canvasHeight === "number") {
+        state.canvasHeight = Math.max(BOARD_MIN_HEIGHT, parsed.canvasHeight);
+      } else {
+        state.canvasHeight = BOARD_MIN_HEIGHT;
+      }
+
       state.selectedItemId = null;
 
       saveLayout();
@@ -735,51 +840,63 @@ document.addEventListener("DOMContentLoaded", () => {
       renderBoard();
     } catch (error) {
       console.error(error);
-      paperList.innerHTML = `
-        <div class="paper-list-placeholder">
-          Failed to load papers.json
-        </div>
-      `;
+      if (paperList) {
+        paperList.innerHTML = `
+          <div class="paper-list-placeholder">
+            Failed to load papers.json
+          </div>
+        `;
+      }
       updateCounts();
     }
   }
 
   function bindEvents() {
-    searchInput.addEventListener("input", () => {
-      state.searchText = searchInput.value;
-      renderPaperList();
-    });
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        state.searchText = searchInput.value;
+        renderPaperList();
+      });
+    }
 
-    placeAllBtn.addEventListener("click", placeAllPapers);
-    connectBtn.addEventListener("click", connectBoardItems);
-    exportBtn.addEventListener("click", exportLayout);
+    if (placeAllBtn) placeAllBtn.addEventListener("click", placeAllPapers);
+    if (connectBtn) connectBtn.addEventListener("click", connectBoardItems);
+    if (exportBtn) exportBtn.addEventListener("click", exportLayout);
 
-    importBtn.addEventListener("click", () => {
-      importFileInput.click();
-    });
-
-    importFileInput.addEventListener("change", (event) => {
-      const file = event.target.files?.[0];
-      handleImportFile(file);
-      importFileInput.value = "";
-    });
-
-    resetBtn.addEventListener("click", resetBoard);
-    darkBtn.addEventListener("click", toggleTheme);
-
-    fsBtn.addEventListener("click", async () => {
-      try {
-        if (!document.fullscreenElement) {
-          await document.documentElement.requestFullscreen();
-          showToast("Full screen on");
-        } else {
-          await document.exitFullscreen();
-          showToast("Full screen off");
+    if (importBtn) {
+      importBtn.addEventListener("click", () => {
+        if (importFileInput) {
+          importFileInput.click();
         }
-      } catch (error) {
-        console.error(error);
-      }
-    });
+      });
+    }
+
+    if (importFileInput) {
+      importFileInput.addEventListener("change", (event) => {
+        const file = event.target.files?.[0];
+        handleImportFile(file);
+        importFileInput.value = "";
+      });
+    }
+
+    if (resetBtn) resetBtn.addEventListener("click", resetBoard);
+    if (darkBtn) darkBtn.addEventListener("click", toggleTheme);
+
+    if (fsBtn) {
+      fsBtn.addEventListener("click", async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await document.documentElement.requestFullscreen();
+            showToast("Full screen on");
+          } else {
+            await document.exitFullscreen();
+            showToast("Full screen off");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    }
 
     if (zoomInBtn) {
       zoomInBtn.addEventListener("click", () => {
@@ -799,76 +916,90 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    board.addEventListener("click", () => {
-      state.selectedItemId = null;
-      renderBoard();
-    });
+    if (board) {
+      board.addEventListener("click", () => {
+        state.selectedItemId = null;
+        renderBoard();
+      });
 
-    board.addEventListener("dblclick", (event) => {
-      const clickedInsideItem = event.target.closest(".board-item");
-      if (clickedInsideItem) return;
+      board.addEventListener("dblclick", (event) => {
+        const clickedInsideItem = event.target.closest(".board-item");
+        if (clickedInsideItem) return;
 
-      const rect = boardCanvas.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / state.zoom;
-      const y = (event.clientY - rect.top) / state.zoom;
-      openNoteModal(null, x, y);
-    });
+        const rect = boardCanvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / state.zoom;
+        const y = (event.clientY - rect.top) / state.zoom;
+        openNoteModal(null, x, y);
+      });
 
-    board.addEventListener(
-      "wheel",
-      (event) => {
-        if (!event.ctrlKey) return;
-        event.preventDefault();
+      board.addEventListener(
+        "wheel",
+        (event) => {
+          if (!event.ctrlKey) return;
+          event.preventDefault();
 
-        if (event.deltaY < 0) {
-          setZoom(state.zoom + ZOOM_STEP);
-        } else {
-          setZoom(state.zoom - ZOOM_STEP);
+          if (event.deltaY < 0) {
+            setZoom(state.zoom + ZOOM_STEP);
+          } else {
+            setZoom(state.zoom - ZOOM_STEP);
+          }
+        },
+        { passive: false }
+      );
+    }
+
+    if (closeNoteModalBtn) closeNoteModalBtn.addEventListener("click", closeNoteModal);
+    if (saveNoteBtn) saveNoteBtn.addEventListener("click", saveNoteFromModal);
+    if (deleteNoteBtn) deleteNoteBtn.addEventListener("click", deleteNoteFromModal);
+
+    if (closePaperModalBtn) closePaperModalBtn.addEventListener("click", closePaperModal);
+
+    if (addPaperToBoardBtn) {
+      addPaperToBoardBtn.addEventListener("click", () => {
+        if (!state.currentPaperModalId) return;
+        addPaperToBoard(state.currentPaperModalId);
+        openPaperModal(state.currentPaperModalId);
+      });
+    }
+
+    if (removePaperFromBoardBtn) {
+      removePaperFromBoardBtn.addEventListener("click", () => {
+        if (!state.currentPaperModalId) return;
+        removePaperFromBoard(state.currentPaperModalId);
+      });
+    }
+
+    if (closeExportModalBtn) closeExportModalBtn.addEventListener("click", closeExportModal);
+
+    if (copyExportBtn) {
+      copyExportBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(exportTextarea.value);
+          showToast("Copied");
+        } catch (error) {
+          console.error(error);
+          alert("Copy failed");
         }
-      },
-      { passive: false }
-    );
+      });
+    }
 
-    closeNoteModalBtn.addEventListener("click", closeNoteModal);
-    saveNoteBtn.addEventListener("click", saveNoteFromModal);
-    deleteNoteBtn.addEventListener("click", deleteNoteFromModal);
+    if (noteModal) {
+      noteModal.addEventListener("click", (event) => {
+        if (event.target === noteModal) closeNoteModal();
+      });
+    }
 
-    closePaperModalBtn.addEventListener("click", closePaperModal);
+    if (paperModal) {
+      paperModal.addEventListener("click", (event) => {
+        if (event.target === paperModal) closePaperModal();
+      });
+    }
 
-    addPaperToBoardBtn.addEventListener("click", () => {
-      if (!state.currentPaperModalId) return;
-      addPaperToBoard(state.currentPaperModalId);
-      openPaperModal(state.currentPaperModalId);
-    });
-
-    removePaperFromBoardBtn.addEventListener("click", () => {
-      if (!state.currentPaperModalId) return;
-      removePaperFromBoard(state.currentPaperModalId);
-    });
-
-    closeExportModalBtn.addEventListener("click", closeExportModal);
-
-    copyExportBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(exportTextarea.value);
-        showToast("Copied");
-      } catch (error) {
-        console.error(error);
-        alert("Copy failed");
-      }
-    });
-
-    noteModal.addEventListener("click", (event) => {
-      if (event.target === noteModal) closeNoteModal();
-    });
-
-    paperModal.addEventListener("click", (event) => {
-      if (event.target === paperModal) closePaperModal();
-    });
-
-    exportModal.addEventListener("click", (event) => {
-      if (event.target === exportModal) closeExportModal();
-    });
+    if (exportModal) {
+      exportModal.addEventListener("click", (event) => {
+        if (event.target === exportModal) closeExportModal();
+      });
+    }
 
     window.addEventListener("resize", renderConnections);
   }
